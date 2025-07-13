@@ -10,13 +10,11 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
     origin: [
-        "http://localhost:3000",
         "https://meddybuddy-ecommerce-3170maxzd-rishanth-reddys-projects.vercel.app"
     ],
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+    credentials: true
 }));
+
 
 
 const { config } = require("dotenv");
