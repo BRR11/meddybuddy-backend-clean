@@ -1,39 +1,40 @@
 const app = require("./app");
 const dotenv = require("dotenv");
-const Razorpay = require('razorpay');
-
-const connectDB = require("../backend/config/database")
+const Razorpay = require("razorpay");
+const connectDB = require("./config/database"); // Updated path!
 
 // Handling Uncaught Exception
 process.on("uncaughtException", (err) => {
-    console.log(`Error: ${err.message}`);
-    console.log(`Shutting down the server due to Uncaught Exception`);
-    process.exit(1);
-  });
+  console.log(`Error: ${err.message}`);
+  console.log("Shutting down the server due to Uncaught Exception");
+  process.exit(1);
+});
 
-  //config
-dotenv.config({path:"backend/config/config.env"});
+// Config
+dotenv.config({ path: "./config/config.env" });
+
+// Connect to Database
 connectDB();
 
-const server = app.listen(process.env.PORT,()=>{
+// Server Setup
+const PORT = process.env.PORT || 4000;
 
-
-    console.log(`Server Is Working On https://localhost:${process.env.PORT}`);
+const server = app.listen(PORT, () => {
+  console.log(`Server is working on http://localhost:${PORT}`);
 });
 
+// Razorpay Instance
 module.exports.instance = new Razorpay({
-
-  key_id: "rzp_test_zMIzLEfR2oKln6",
-  key_secret: "ng4Sm0wfofLIY1Rj5F7d0r8r",
+  key_id: process.env.RAZORPAY_API_KEY,
+  key_secret: process.env.RAZORPAY_SECRET,
 });
 
-
-// Unhandled Promise Rejection
+// Handling Unhandled Promise Rejection
 process.on("unhandledRejection", (err) => {
-    console.log(`Error: ${err.message}`);
-    console.log(`Shutting down the server due to Unhandled Promise Rejection`);
-  
-    server.close(() => {
-      process.exit(1);
-    });
+  console.log(`Error: ${err.message}`);
+  console.log("Shutting down the server due to Unhandled Promise Rejection");
+
+  server.close(() => {
+    process.exit(1);
   });
+});
