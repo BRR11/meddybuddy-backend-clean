@@ -9,12 +9,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
-    origin: [
-        "meddybuddy-ecommerce-mavz-1q8hzdvml-rishanth-reddys-projects.vercel.app"
-    ],
-    credentials: true
+  origin: "https://meddybuddy-ecommerce-mavz-1q8hzdvml-rishanth-reddys-projects.vercel.app",
+  credentials: true
 }));
-
 
 
 const { config } = require("dotenv");
