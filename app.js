@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
     origin: [
-        "https://meddybuddy-ecommerce-3170maxzd-rishanth-reddys-projects.vercel.app"
+        "meddybuddy-ecommerce-mavz-1q8hzdvml-rishanth-reddys-projects.vercel.app"
     ],
     credentials: true
 }));
